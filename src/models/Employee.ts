@@ -6,7 +6,7 @@ export interface Employee {
     email: string;
     birthDate: Date|null;
     basicSalary: number|null;
-    status: string|null;
-    group: string|null;
+    status: string;
+    group: string;
     description: Date|null;
 }

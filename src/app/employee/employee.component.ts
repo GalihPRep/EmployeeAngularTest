@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 import { EMPLOYEES } from '../../constants/Employees';
 import { EmployeeUpdateComponent } from './employee-update/employee-update.component';
+import { EmployeeCreateComponent } from './employee-create/employee-create.component';
 
 
 
@@ -14,7 +15,8 @@ import { EmployeeUpdateComponent } from './employee-update/employee-update.compo
     FormsModule,    // To use `ngModel`.
     NgFor,    // To use `*ngFor`.
     NgIf,    // To use `*ngIf`.
-    EmployeeUpdateComponent    // Child component.
+    EmployeeUpdateComponent,    // Child component.
+    EmployeeCreateComponent    // Child component.
   ],
   templateUrl: './employee.component.html',
   styleUrl: './employee.component.css'
@@ -22,6 +24,23 @@ import { EmployeeUpdateComponent } from './employee-update/employee-update.compo
 
 export class EmployeeComponent {
   employeeList = EMPLOYEES;
+
+  /** CREATE. */
+  employeeCreated: boolean = false;
+
+  /** CREATE. */
+  createEmployeeBegins() {
+    this.employeeCreated = true;
+  }
+
+  /** CREATE. */
+  createEmployee(employee: Employee | null): void {
+    if (employee != null) {
+      employee.id = this.employeeList.length + 1;
+      this.employeeList.push(employee);
+    }
+    this.employeeCreated = false;
+  }
 
   /** READ. */
   employeeRead?: Employee;
@@ -41,6 +60,9 @@ export class EmployeeComponent {
     else this.employeeUpdated = undefined;
   }
 
+  /** DELETE. */
+  employeeDeleted?: Employee;
+
   /** Is `employeeList` sorted descending? */
   employeeListSorting: boolean | null = null;
 
@@ -50,11 +72,10 @@ export class EmployeeComponent {
       sortString(a, b, this.employeeListSorting);
     switch (keyword) {
       case "username":
-        this.employeeList
-          .sort((n, o) => sorter(
-            n.username,
-            o.username
-          ));
+        this.employeeList.sort((n, o) => sorter(
+          n.username,
+          o.username
+        ));
         break;
       case "name":
         this.employeeList.sort((n, o) => sorter(
@@ -88,8 +109,8 @@ export class EmployeeComponent {
     email: '',
     birthDate: null,
     basicSalary: null,
-    status: null,
-    group: null,
+    status: '',
+    group: '',
     description: null
   }
 

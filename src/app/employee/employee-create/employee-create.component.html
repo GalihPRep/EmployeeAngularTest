@@ -1,7 +1,7 @@
 <div *ngIf="employeeBefore">
     <div class="modal">
         <div class="modal-content">
-            <h2>Edit this employee</h2>
+            <h2>Create new employee</h2>
 
             <!-- Input fields. -->
             <table>
@@ -54,8 +54,7 @@
                     <tr>
                         <td><label for="employee-birth-date">Birthdate</label></td>
                         <td>:</td>
-                        <td><input id="employee-birth-date" [(ngModel)]="employeeBefore.birthDate"
-                                type="date"></td>
+                        <td><input id="employee-birth-date" [(ngModel)]="employeeBefore.birthDate" type="date"></td>
                     </tr>
                     <tr *ngIf="!isNotTomorrow(employeeBefore.birthDate)" class="warning">
                         <td></td>
@@ -105,8 +104,7 @@
                     <tr>
                         <td><label for="employee-description">Description</label></td>
                         <td>:</td>
-                        <td><input id="employee-description" [(ngModel)]="employeeBefore.description"
-                                type="date"></td>
+                        <td><input id="employee-description" [(ngModel)]="employeeBefore.description" type="date"></td>
                     </tr>
                     <tr *ngIf="employeeBefore.description == null" class="warning">
                         <td></td>
@@ -117,7 +115,20 @@
             </table>
 
             <!-- Button. -->
-            <button class="done-button" (click)="updateEmployee(employeeBefore)">Done</button>
+            <div>
+                <button *ngIf="
+                    employeeBefore.username.length >= 1
+                    && employeeBefore.firstName.length >= 1
+                    && employeeBefore.lastName.length >= 1
+                    && isEmail(employeeBefore.email)
+                    && isNotTomorrow(employeeBefore.birthDate)
+                    && isNumber(employeeBefore.basicSalary)
+                    && employeeBefore.status.length >= 1
+                    && employeeBefore.group.length >= 1
+                    && employeeBefore.description != null
+                " class="done-button" (click)="createEmployee(employeeBefore)">Save</button>
+                <button class="done-button" (click)="createEmployee(null)">Cancel</button>
+            </div>
         </div>
     </div>
 </div>

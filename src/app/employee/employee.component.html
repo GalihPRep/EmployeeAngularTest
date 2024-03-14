@@ -1,16 +1,26 @@
+<!-- CREATE the employee. -->
+<div *ngIf="employeeCreated">
+    <app-employee-create [isEmployeeBeingCreated]="employeeCreated" (employeeAfter)="createEmployee($event)"></app-employee-create>
+</div>
+
+
+
 <!-- UPDATE the employee. -->
 <div *ngIf="employeeUpdated">
-    <app-employee-update 
-    [employeeBefore]="employeeUpdated"
-    (employeeAfter)="updateEmployee($event)"
-    ></app-employee-update>
+    <app-employee-update [employeeBefore]="employeeUpdated"
+        (employeeAfter)="updateEmployee($event)"></app-employee-update>
 </div>
 
 
+
+<!-- Count. -->
 <div class="count">
-    Showing {{filterEmployeeList(employeeFiltered).length}} 
+    Showing {{filterEmployeeList(employeeFiltered).length}}
     of {{employeeList.length}} data.
+    <button class="add-button" type="button" (click)="createEmployeeBegins()">Add new employee</button>
 </div>
+
+
 
 <!-- The main table. -->
 <table class="table">
@@ -18,7 +28,7 @@
         <td>
             <div class="table-header">
                 <button class="table-header-title" (click)="sortEmployeeList('username')">
-                    <div >Username</div>
+                    <div>Username</div>
                     <div *ngIf="employeeListSorting == null">⯁</div>
                     <div *ngIf="employeeListSorting == false">⯆</div>
                     <div *ngIf="employeeListSorting == true">⯅</div>
@@ -29,7 +39,7 @@
         <td>
             <div class="table-header">
                 <button class="table-header-title" (click)="sortEmployeeList('name')">
-                    <div >Name</div>
+                    <div>Name</div>
                     <div *ngIf="employeeListSorting == null">⯁</div>
                     <div *ngIf="employeeListSorting == false">⯆</div>
                     <div *ngIf="employeeListSorting == true">⯅</div>
@@ -49,7 +59,31 @@
             </div>
         </td>
         <td>
-            <div class="table-header"><div>Actions</div></div>
+            <div class="table-header">
+                <button class="table-header-title" (click)="sortEmployeeList('status')">
+                    <div>Status</div>
+                    <div *ngIf="employeeListSorting == null">⯁</div>
+                    <div *ngIf="employeeListSorting == false">⯆</div>
+                    <div *ngIf="employeeListSorting == true">⯅</div>
+                </button>
+                <input class="table-header-filter" [(ngModel)]="employeeFiltered.status">
+            </div>
+        </td>
+        <td>
+            <div class="table-header">
+                <button class="table-header-title" (click)="sortEmployeeList('group')">
+                    <div>Group</div>
+                    <div *ngIf="employeeListSorting == null">⯁</div>
+                    <div *ngIf="employeeListSorting == false">⯆</div>
+                    <div *ngIf="employeeListSorting == true">⯅</div>
+                </button>
+                <input class="table-header-filter" [(ngModel)]="employeeFiltered.group">
+            </div>
+        </td>
+        <td>
+            <div class="table-header">
+                <div>Actions</div>
+            </div>
         </td>
     </thead>
     <tbody *ngFor="let n of filterEmployeeList(employeeFiltered)">
@@ -57,6 +91,8 @@
             <td [class.selected]="n === employeeUpdated" (click)="readEmployee(n)">{{n.username}}</td>
             <td [class.selected]="n === employeeUpdated" (click)="readEmployee(n)">{{n.firstName}} {{n.lastName}}</td>
             <td [class.selected]="n === employeeUpdated" (click)="readEmployee(n)">{{n.email}}</td>
+            <td [class.selected]="n === employeeUpdated" (click)="readEmployee(n)">{{n.status}}</td>
+            <td [class.selected]="n === employeeUpdated" (click)="readEmployee(n)">{{n.group}}</td>
             <td>
                 <button class="edit-button" [class.selected]="n === employeeUpdated" type="button"
                     (click)="updateEmployee(n)">Edit</button>
@@ -71,10 +107,8 @@
 
 <!-- READ employee. -->
 <div *ngIf="employeeRead">
-
     <div class="edit-modal" (keypress)="readEmployee(employeeRead)">
         <div class="edit-modal-content">
-
             <!-- Title. -->
             <div class="edit-modal-content-title">
                 <h2>
@@ -84,7 +118,6 @@
                 </h2>
                 <span class="close-button" type="button" (click)="readEmployee(employeeRead)">&times;</span>
             </div>
-
             <!-- Input fields. -->
             <table>
                 <tbody>
@@ -140,5 +173,3 @@
         </div>
     </div>
 </div>
-
-
