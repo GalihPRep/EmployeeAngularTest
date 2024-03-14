@@ -68,14 +68,10 @@ export class EmployeeComponent {
 
   /** Sort the employees. */
   sortEmployeeList(keyword: string): void {
-    const sorter = (a: string, b: string) =>
-      sortString(a, b, this.employeeListSorting);
+    const sorter = (a: string, b: string) => sortString(a, b, this.employeeListSorting);
     switch (keyword) {
       case "username":
-        this.employeeList.sort((n, o) => sorter(
-          n.username,
-          o.username
-        ));
+        this.employeeList.sort((n, o) => sorter(n.username, o.username));
         break;
       case "name":
         this.employeeList.sort((n, o) => sorter(
@@ -84,13 +80,16 @@ export class EmployeeComponent {
         ));
         break;
       case "email":
-        this.employeeList.sort((n, o) => sorter(
-          n.email,
-          o.email
-        ));
+        this.employeeList.sort((n, o) => sorter(n.email, o.email));
+        break;
+      case "status":
+        this.employeeList.sort((n, o) => sorter(n.status, o.status));
+        break;
+      case "group":
+        this.employeeList.sort((n, o) => sorter(n.group, o.group));
         break;
       default:
-        break;;
+        break;
     }
     if (this.employeeListSorting == null) this.employeeListSorting = false;
     else if (!this.employeeListSorting) this.employeeListSorting = true;
@@ -116,13 +115,72 @@ export class EmployeeComponent {
 
   /** Filter the employee. */
   filterEmployeeList(query: Employee): Employee[] {
-    return this.employeeList.filter(n =>
-      n.username.toLowerCase().includes(query.username.toLowerCase()) && (
+    const result = this.employeeList.filter(n =>
+      n.username.toLowerCase().includes(query.username.toLowerCase())
+      && (
         n.firstName.toLowerCase().includes(query.firstName.toLowerCase())
         || n.lastName.toLowerCase().includes(query.firstName.toLowerCase())
-      ) && n.email.toLowerCase().includes(query.email.toLowerCase())
+      )
+      && n.email.toLowerCase().includes(query.email.toLowerCase())
+      && n.status.toLowerCase().includes(query.status.toLowerCase())
+      && n.group.toLowerCase().includes(query.group.toLowerCase())
+    );
+    // this.setPageSize(6);
+    this.lastPage = Math.ceil(Math.max(1, result.length) / this.expectedPageSize);
+    this.currentPage = Math.min(this.currentPage, this.lastPage);
+    return result;
+  }
+
+  /** Current page! */
+  currentPage = 1;
+
+  /** Pages! */
+  lastPage = 1;
+
+  /** Size */
+  expectedPageSize = 10;
+
+  /** For page buttons */
+  pageNumberList(): number[] {
+    return Array.from({ length: this.lastPage }, (_, i) => i + 1);
+  }
+
+  /** Divide the employee list into pages. */
+  pageEmployeeList(query: Employee): Employee[] {
+    const result = this.filterEmployeeList(query);
+    const firstIndex = (this.currentPage - 1) * this.expectedPageSize;
+    const actualSize = this.lastPage * this.expectedPageSize - firstIndex;
+    return result.slice(
+      firstIndex,
+      firstIndex + Math.min(this.expectedPageSize, actualSize)
     );
   }
+
+  toPreviousPage(first: boolean = false): void {
+    if (this.currentPage > 1) {
+      if (first) this.currentPage = 1;
+      else this.currentPage -= 1;
+    }
+  }
+
+  toPage(number: number): void {
+    this.currentPage = number;
+  }
+
+  toNextPage(last: boolean = false): void {
+    if (this.currentPage < this.lastPage) {
+      if (last) this.currentPage = this.lastPage;
+      else this.currentPage += 1;
+    }
+  }
+
+  
+
+  setPageSize(size: number): void {
+    this.expectedPageSize = size;
+  }
+
+  
 }
 
 

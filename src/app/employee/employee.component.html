@@ -1,6 +1,7 @@
 <!-- CREATE the employee. -->
 <div *ngIf="employeeCreated">
-    <app-employee-create [isEmployeeBeingCreated]="employeeCreated" (employeeAfter)="createEmployee($event)"></app-employee-create>
+    <app-employee-create [isEmployeeBeingCreated]="employeeCreated"
+        (employeeAfter)="createEmployee($event)"></app-employee-create>
 </div>
 
 
@@ -12,12 +13,30 @@
 </div>
 
 
-
+<button class="add-button" type="button" (click)="createEmployeeBegins()">Add new employee</button>
 <!-- Count. -->
 <div class="count">
-    Showing {{filterEmployeeList(employeeFiltered).length}}
-    of {{employeeList.length}} data.
-    <button class="add-button" type="button" (click)="createEmployeeBegins()">Add new employee</button>
+    <div class="paging">
+        Showing {{filterEmployeeList(employeeFiltered).length}}
+        of {{employeeList.length}} data. Page {{currentPage}} of {{lastPage}}.
+    </div>
+    <div class="paging">
+        Show
+        <select class="paging-select" [(ngModel)]="expectedPageSize">
+            <option class="paging-select-option" value="6">6</option>
+            <option value="10" value="10" [defaultSelected]="true">10</option>
+            <option value="12" value="12">12</option>
+            <option value="20" value="20">20</option>
+            <option value="30" value="30">30</option>
+            <option value="60" value="60">60</option>
+        </select>
+        rows.
+        <button class="paging-button" (click)="toPreviousPage(true)">«</button>
+        <button class="paging-button" (click)="toPreviousPage()">‹</button>
+        <button class="paging-button" *ngFor="let i of pageNumberList()" (click)="toPage(i)">{{i}}</button>
+        <button class="paging-button" (click)="toNextPage()">›</button>
+        <button class="paging-button" (click)="toNextPage(true)">»</button>
+    </div>
 </div>
 
 
@@ -82,11 +101,12 @@
         </td>
         <td>
             <div class="table-header">
-                <div>Actions</div>
+                <button class="table-header-title">Actions</button>
+                <input class="table-header-filler">
             </div>
         </td>
     </thead>
-    <tbody *ngFor="let n of filterEmployeeList(employeeFiltered)">
+    <tbody *ngFor="let n of pageEmployeeList(employeeFiltered)">
         <tr>
             <td [class.selected]="n === employeeUpdated" (click)="readEmployee(n)">{{n.username}}</td>
             <td [class.selected]="n === employeeUpdated" (click)="readEmployee(n)">{{n.firstName}} {{n.lastName}}</td>

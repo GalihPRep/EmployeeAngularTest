@@ -18,7 +18,9 @@ thead {
 
 .add-button,
 .edit-button,
-.delete-button {
+.delete-button,
+.paging-button,
+.paging-select {
     border: none;
     border-radius: 8px;
     font-size: 12pt;
@@ -26,17 +28,22 @@ thead {
     padding-bottom: 8px;
     padding-left: 12px;
     padding-right: 12px;
+}
+
+.edit-button,
+.delete-button {
     margin-left: 4px;
     margin-right: 4px;
 }
 
 .add-button {
     background-color: #C0FF00;
+    margin-bottom: 5px;
 }
 
 .add-button:hover,
 .add-button:focus {
-    background-color: #00FFC0;
+    background-color: #C8FF20;
     cursor: pointer;
 }
 
@@ -46,8 +53,8 @@ thead {
 }
 
 .delete-button:hover,
-.deleye-button:focus {
-    background-color: #0020FF;
+.delete-button:focus {
+    background-color: #ff5820;
     cursor: pointer;
 }
 
@@ -57,17 +64,42 @@ thead {
 
 .edit-button:hover,
 .edit-button:focus {
-    background-color: #00E0FF;
+    background-color: #ffff20;
     cursor: pointer;
+}
+
+.paging-button {
+    background-color: #4070FF;
+    color: white;
+}
+
+.paging-select {
+    background-color: #f0f0f0;
+    color: black;
+}
+
+.paging-button,
+.paging-select {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.paging-button:hover,
+.paging-button:focus {
+    background-color: #609CFF;
+    cursor: pointer;
+    outline: none;
 }
 
 
 
 
 
-
-
-
+.paging {
+    padding-left: 3px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
 
 .edit-modal {
@@ -127,13 +159,13 @@ table {
 }
 
 .table thead {
-    background-color: black;
+    background-color: #4070FF;
     color: white;
 }
 
 .table thead td {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     padding-top: 10px;
     padding-bottom: 5px;
     font-size: 13.5pt;
@@ -149,15 +181,16 @@ table {
 }
 
 .table tbody tr:hover {
-    background-color: #fff0e0;
+    background-color: #E0F0FF;
 }
 
 .table-header {
     flex-direction: column;
     display: flex;
+    align-items: center;
 }
 
-.table-header-filter {
+.table-header-filter, .table-header-filler {
     width: 100%;
     border: none;
     border-radius: 5px;
@@ -165,6 +198,10 @@ table {
     margin-bottom: 5px;
     padding: 5px;
     font-size: 12.5pt;
+}
+
+.table-header-filler {
+    background-color: #4070FF;
 }
 
 .table-header-title {

@@ -33,12 +33,8 @@ thead {
 
 .done-button:hover,
 .done-button:focus {
-    background-color: #00E0FF;
+    background-color: #ffff20;
     cursor: pointer;
-}
-
-.done-button {
-    background-color: #FFE000;
 }
 
 
@@ -80,6 +76,13 @@ label,
 input,
 select {
     font-size: larger;
+}
+
+input, select {
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #E0F0FF;
 }
 
 .modal-content h2 {
