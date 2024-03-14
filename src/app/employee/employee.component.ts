@@ -26,14 +26,14 @@ export class EmployeeComponent {
   /** READ. */
   employeeRead?: Employee;
 
-  /** UPDATE. */
-  employeeUpdated?: Employee;
-
   /** READ. */
   readEmployee(employee: Employee): void {
     if (this.employeeRead == undefined) this.employeeRead = employee;
     else this.employeeRead = undefined;
   }
+
+  /** UPDATE. */
+  employeeUpdated?: Employee;
 
   /** UPDATE. */
   updateEmployee(employee: Employee): void {
@@ -77,6 +77,30 @@ export class EmployeeComponent {
       this.employeeListSorting = null;
       this.employeeList.sort((n, o) => n.id - o.id)
     }
+  }
+
+  /** Query to filter the employee list. */
+  employeeFiltered: Employee = {
+    id: 0,
+    firstName: "",
+    username: '',
+    lastName: '',
+    email: '',
+    birthDate: null,
+    basicSalary: null,
+    status: null,
+    group: null,
+    description: null
+  }
+
+  /** Filter the employee. */
+  filterEmployeeList(query: Employee): Employee[] {
+    return this.employeeList.filter(n =>
+      n.username.toLowerCase().includes(query.username.toLowerCase()) && (
+        n.firstName.toLowerCase().includes(query.firstName.toLowerCase())
+        || n.lastName.toLowerCase().includes(query.firstName.toLowerCase())
+      ) && n.email.toLowerCase().includes(query.email.toLowerCase())
+    );
   }
 }
 

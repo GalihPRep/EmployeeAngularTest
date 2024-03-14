@@ -1,2 +1,65 @@
-<p>{{employeeUpdated?.username}} works!</p>
+<div *ngIf="employeeBefore">
+    <div class="modal">
+        <div class="modal-content">
+            <h2>Edit this employee</h2>
 
+            <!-- Input fields. -->
+            <table>
+                <tbody>
+                    <tr>
+                        <td><label for="employee-username">Username</label></td>
+                        <td>:</td>
+                        <td><input id="employee-username" [(ngModel)]="employeeBefore.username"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="employee-first-name">First name</label></td>
+                        <td>:</td>
+                        <td><input id="employee-first-name" [(ngModel)]="employeeBefore.firstName"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="employee-last-name">Last name</label>
+                        </td>
+                        <td>:</td>
+                        <td><input id="employee-last-name" [(ngModel)]="employeeBefore.lastName"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="employee-email">Email</label></td>
+                        <td>:</td>
+                        <td><input id="employee-email" [(ngModel)]="employeeBefore.email"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="employee-birth-date">Birthdate</label></td>
+                        <td>:</td>
+                        <td><input id="employee-birth-date" [(ngModel)]="employeeBefore.birthDate"
+                                type="datetime-local"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="employee-basic-salary">Basic salary</label></td>
+                        <td>:</td>
+                        <td><input id="employee-basic-salary" [(ngModel)]="employeeBefore.basicSalary"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="employee-status">Status</label>
+                        </td>
+                        <td>:</td>
+                        <td><input id="employee-status" [(ngModel)]="employeeBefore.status"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="employee-group">Group</label></td>
+                        <td>:</td>
+                        <td><input id="employee-group" [(ngModel)]="employeeBefore.group"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="employee-description">Description</label></td>
+                        <td>:</td>
+                        <td><input id="employee-description" [(ngModel)]="employeeBefore.description"
+                                type="datetime-local"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Button. -->
+            <button class="done-button" (click)="updateEmployee(employeeBefore)">Done</button>
+        </div>
+    </div>
+</div>

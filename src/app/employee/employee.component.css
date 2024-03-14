@@ -1,3 +1,4 @@
+div,
 h1,
 h2,
 h3,
@@ -10,7 +11,13 @@ thead {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.edit-button, .delete-button {
+.count {
+    padding-bottom: 8px;
+    font-size: 12pt;
+}
+
+.edit-button,
+.delete-button {
     border: none;
     border-radius: 8px;
     font-size: 12pt;
@@ -26,10 +33,25 @@ thead {
     background-color: #FFE000;
 }
 
+.edit-button:hover,
+.edit-button:focus {
+    background-color: #00E0FF;
+    cursor: pointer;
+}
+
 .delete-button {
     background-color: #FF2000;
     color: white;
 }
+
+.delete-button:hover,
+.deleye-button:focus {
+    background-color: #0020FF;
+    cursor: pointer;
+}
+
+
+
 
 
 
@@ -85,19 +107,6 @@ input {
     margin-bottom: 0;
 }
 
-.close-button {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-.close-button:hover,
-.close-button:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 table {
     border-collapse: collapse;
 }
@@ -110,20 +119,22 @@ table {
 .table thead td {
     padding-left: 10px;
     padding-right: 10px;
-    padding-top: 5px;
+    padding-top: 10px;
     padding-bottom: 5px;
-    font-size: 12pt;
+    font-size: 13.5pt;
 }
+
 .table tbody tr td {
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 3px;
     padding-bottom: 3px;
-    font-size: 12pt;
+    font-size: 12.5pt;
+    width: 216px;
 }
 
 .table tbody tr:hover {
-    background-color: aqua;
+    background-color: #fff0e0;
 }
 
 .table-header {
@@ -131,3 +142,25 @@ table {
     display: flex;
 }
 
+.table-header-filter {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    font-size: 12.5pt;
+}
+
+.table-header-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0;
+    font-size: 12.5pt;
+    border: none;
+    background: none;
+    color: white;
+}

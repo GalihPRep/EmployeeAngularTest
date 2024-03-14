@@ -1,43 +1,62 @@
-<app-employee-update [employeeUpdated]="employeeUpdated"></app-employee-update>
+<!-- UPDATE the employee. -->
+<div *ngIf="employeeUpdated">
+    <app-employee-update 
+    [employeeBefore]="employeeUpdated"
+    (employeeAfter)="updateEmployee($event)"
+    ></app-employee-update>
+</div>
+
+
+<div class="count">
+    Showing {{filterEmployeeList(employeeFiltered).length}} 
+    of {{employeeList.length}} data.
+</div>
 
 <!-- The main table. -->
 <table class="table">
     <thead>
-        <td (click)="sortEmployeeList('username')">
+        <td>
             <div class="table-header">
-                Username
-                <input type="text">
+                <button class="table-header-title" (click)="sortEmployeeList('username')">
+                    <div >Username</div>
+                    <div *ngIf="employeeListSorting == null">⯁</div>
+                    <div *ngIf="employeeListSorting == false">⯆</div>
+                    <div *ngIf="employeeListSorting == true">⯅</div>
+                </button>
+                <input class="table-header-filter" [(ngModel)]="employeeFiltered.username">
             </div>
-        </td>
-        <td (click)="sortEmployeeList('name')">
-            <div class="table-header">
-                Name
-                <input type="text">
-            </div>
-        </td>
-        <td (click)="sortEmployeeList('email')">
-            <div class="table-header">Email
-                <input type="text">
-            </div>
-
         </td>
         <td>
-            <div class="table-header">Actions
-                <input type="text">
+            <div class="table-header">
+                <button class="table-header-title" (click)="sortEmployeeList('name')">
+                    <div >Name</div>
+                    <div *ngIf="employeeListSorting == null">⯁</div>
+                    <div *ngIf="employeeListSorting == false">⯆</div>
+                    <div *ngIf="employeeListSorting == true">⯅</div>
+                </button>
+                <input class="table-header-filter" [(ngModel)]="employeeFiltered.firstName">
             </div>
         </td>
+        <td>
+            <div class="table-header">
+                <button class="table-header-title" (click)="sortEmployeeList('email')">
+                    <div>Email</div>
+                    <div *ngIf="employeeListSorting == null">⯁</div>
+                    <div *ngIf="employeeListSorting == false">⯆</div>
+                    <div *ngIf="employeeListSorting == true">⯅</div>
+                </button>
+                <input class="table-header-filter" [(ngModel)]="employeeFiltered.email">
+            </div>
+        </td>
+        <td>
+            <div class="table-header"><div>Actions</div></div>
+        </td>
     </thead>
-    <tbody *ngFor="let n of employeeList">
+    <tbody *ngFor="let n of filterEmployeeList(employeeFiltered)">
         <tr>
-            <!-- Username. -->
             <td [class.selected]="n === employeeUpdated" (click)="readEmployee(n)">{{n.username}}</td>
-
-            <!-- Given name. -->
             <td [class.selected]="n === employeeUpdated" (click)="readEmployee(n)">{{n.firstName}} {{n.lastName}}</td>
-
-            <!-- Last name. -->
             <td [class.selected]="n === employeeUpdated" (click)="readEmployee(n)">{{n.email}}</td>
-
             <td>
                 <button class="edit-button" [class.selected]="n === employeeUpdated" type="button"
                     (click)="updateEmployee(n)">Edit</button>
@@ -52,8 +71,10 @@
 
 <!-- READ employee. -->
 <div *ngIf="employeeRead">
+
     <div class="edit-modal" (keypress)="readEmployee(employeeRead)">
         <div class="edit-modal-content">
+
             <!-- Title. -->
             <div class="edit-modal-content-title">
                 <h2>
@@ -121,73 +142,3 @@
 </div>
 
 
-
-<!-- UPDATE employee. -->
-<div *ngIf="employeeUpdated">
-    <div class="edit-modal" (keypress)="updateEmployee(employeeUpdated)">
-        <div class="edit-modal-content">
-            <!-- Title. -->
-            <div class="edit-modal-content-title">
-                <h2>
-                    Edit this employee
-                </h2>
-                <span class="close-button" type="button" (click)="updateEmployee(employeeUpdated)">&times;</span>
-            </div>
-
-            <!-- Input fields. -->
-            <table>
-                <tbody>
-                    <tr>
-                        <td><label for="employee-username">Username</label></td>
-                        <td>:</td>
-                        <td><input id="employee-username" [(ngModel)]="employeeUpdated.username"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="employee-first-name">First name</label></td>
-                        <td>:</td>
-                        <td><input id="employee-first-name" [(ngModel)]="employeeUpdated.firstName"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="employee-last-name">Last name</label>
-                        </td>
-                        <td>:</td>
-                        <td><input id="employee-last-name" [(ngModel)]="employeeUpdated.lastName"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="employee-email">Email</label></td>
-                        <td>:</td>
-                        <td><input id="employee-email" [(ngModel)]="employeeUpdated.email"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="employee-birth-date">Birthdate</label></td>
-                        <td>:</td>
-                        <td><input id="employee-birth-date" [(ngModel)]="employeeUpdated.birthDate"
-                                type="datetime-local"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="employee-basic-salary">Basic salary</label></td>
-                        <td>:</td>
-                        <td><input id="employee-basic-salary" [(ngModel)]="employeeUpdated.basicSalary"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="employee-status">Status</label>
-                        </td>
-                        <td>:</td>
-                        <td><input id="employee-status" [(ngModel)]="employeeUpdated.status"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="employee-group">Group</label></td>
-                        <td>:</td>
-                        <td><input id="employee-group" [(ngModel)]="employeeUpdated.group"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="employee-description">Description</label></td>
-                        <td>:</td>
-                        <td><input id="employee-description" [(ngModel)]="employeeUpdated.description"
-                                type="datetime-local"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
