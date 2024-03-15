@@ -33,7 +33,7 @@
                     <tr>
                         <td><label for="employee-birth-date">Birthdate</label></td>
                         <td>:</td>
-                        <td><input id="employee-birth-date" [ngModel]="toDate(employeeRead.birthDate)" readonly></td>
+                        <td><input id="employee-birth-date" [(ngModel)]="employeeRead.birthDate" readonly></td>
                     </tr>
 
                     <tr>
@@ -60,10 +60,10 @@
                     <tr>
                         <td><label for="employee-description">Description</label></td>
                         <td>:</td>
-                        <td><input id="employee-description" [ngModel]="toDate(employeeRead.description)" readonly></td>
+                        <td><input id="employee-description" [(ngModel)]="employeeRead.description" readonly></td>
                     </tr>
                 </tbody>
             </table>
-            <button class="done-button" (click)="unreadEmployee()">Return</button>
+            <button class="done-button" (click)="unreadEmployee()">Ok</button>
         </div>
 </div>

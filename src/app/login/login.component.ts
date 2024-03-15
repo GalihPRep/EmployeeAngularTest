@@ -11,10 +11,11 @@ import { Login } from '../../models/Login';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  loginRejected = false;
   login(input: Login) {
     if (input.username == "a" && input.password == "a") {
       this.loginAfter.emit(true);
-    }
+    } else this.loginRejected = true;
   }
   loginBefore: Login = {
     username: '',

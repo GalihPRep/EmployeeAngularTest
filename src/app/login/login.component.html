@@ -1,6 +1,7 @@
 
 <div class="modal-content">
     <h1>Log in to this app</h1>
+    <p *ngIf="loginRejected" class="warning">Username or password is invalid!</p>
     <table>
         <tbody>
             <tr>

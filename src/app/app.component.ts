@@ -23,7 +23,7 @@ import { NgIf } from '@angular/common';
 
 export class AppComponent {
   title = 'Employee list';
-  isLoggedIn = false;
+  isLoggedIn = true;
   login(): void { this.isLoggedIn = true; }
   logout(): void { this.isLoggedIn = false; }
 }

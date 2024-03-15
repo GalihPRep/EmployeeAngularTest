@@ -1,19 +1,31 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Employee } from '../../../models/Employee';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgSelectOption } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 import { checkEmployeeFields } from '../../../constants/EmployeesUtilities';
 import { DEPARTMENTS } from '../../../constants/Departments';
+import { NgSelectComponent, NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-employee-create',
   standalone: true,
-  imports: [FormsModule, NgIf, NgFor],
+  imports: [FormsModule, NgIf, NgFor, NgSelectModule],
   templateUrl: './employee-create.component.html',
   styleUrl: './employee-create.component.css'
 })
 export class EmployeeCreateComponent {
-  departmentList: String[] = DEPARTMENTS;
+  setDepartment(name: string) { this.employeeBefore.group = name; }
+  getDepartmentList(): string[] {
+    return DEPARTMENTS.filter(n => 
+      n.toLowerCase().includes(this.employeeBefore.group.toLowerCase())
+    );
+  }
+  unsetDepartment() {
+    this.employeeBefore.group = ""
+  }
+  
+
+
   @Input() isEmployeeBeingCreated?: boolean;
 
   /** New employee! */
@@ -65,6 +77,6 @@ export class EmployeeCreateComponent {
       ? false
       : typeof (string) == "number"
         ? true
-        : !isNaN(parseFloat(string));
+        : /^\d+$/.test(string);
   }
 }

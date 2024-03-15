@@ -18,30 +18,35 @@ export class EmployeeReadComponent {
     this.employeeRead = undefined;
   }
 
+  /** Format: MM/DD/YYYY. */
   toDate(date: Date | undefined | null): string | undefined {
-    const dateRaw = date == null ? "" : date?.toLocaleDateString().split("/");
-    const dateDay = dateRaw[0] + (
-      parseInt(dateRaw[0]) == 1
+    const dateRaw = date == null || date == undefined
+      ? "error!"
+      : date?.toLocaleDateString().split("/");
+    const dateDay = dateRaw[1] + (
+      parseInt(dateRaw[1]) == 1
         ? "st"
-        : parseInt(dateRaw[0]) == 2
+        : parseInt(dateRaw[1]) == 2
           ? "nd"
-          : parseInt(dateRaw[0]) == 3
+          : parseInt(dateRaw[1]) == 3
             ? "rd"
             : "th"
     );
     const dateMonth = [
       "January", "February", "March", "April", "May", "June",
       "July", "August", "September", "October", "November", "December"
-    ][parseInt(dateRaw[1]) - 1];
+    ][parseInt(dateRaw[0]) - 1];
     return `${dateMonth} ${dateDay} ${dateRaw[2]}`;
   }
 
   toCurrency(value: number | undefined | null): string {
-    return value == null ? "" : (new Intl.NumberFormat('id-ID', {
-      style: 'currency',
-      currency: 'IDR',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    })).format(value);
+    return value == null || value == undefined
+      ? "error!"
+      : (new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })).format(value);
   }
 }

@@ -1,5 +1,5 @@
 <div class="modal-content">
-    <h1>Create new employee</h1>
+    <h1>Add employee</h1>
 
     <!-- Input fields. -->
     <table>
@@ -75,10 +75,9 @@
                 <td><label for="employee-group">Group</label></td>
                 <td>:</td>
                 <td>
-                    <select id="employee-group" [(ngModel)]="employeeBefore.group">
-                        <option value="">Select the group</option>
-                        <option *ngFor="let n of departmentList" [ngValue]="n">{{n}}</option>
-                    </select>
+                    <ng-select id="employee-group" [(ngModel)]="employeeBefore.group" (clear)="unsetDepartment()">
+                        <ng-option *ngFor="let n of getDepartmentList()" [value]="n">{{n}}</ng-option>
+                    </ng-select>
                 </td>
                 <td *ngIf="!isNotEmpty(employeeBefore.group)" class="warning">
                     Group should be chosen.

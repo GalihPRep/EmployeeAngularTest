@@ -23,7 +23,8 @@ p {
     font-style: italic;
 }
 
-.done-button, .proceed-button {
+.done-button,
+.proceed-button {
     border: none;
     border-radius: 8px;
     font-size: 18pt;
@@ -40,17 +41,20 @@ p {
     margin-left: 4px;
     margin-right: 4px;
 }
+
 .done-button:hover,
 .done-button:focus {
     background-color: #ffff20;
     cursor: pointer;
 }
+
 .proceed-button {
     margin-left: 8px;
     margin-right: 8px;
     background-color: #FF2000;
     color: white;
 }
+
 .proceed-button:hover,
 .proceed-button:focus {
     background-color: #ff5820;
@@ -80,6 +84,7 @@ p {
     background-color: #ffffff;
 }
 
+
 .modal-content td {
     padding: 5px;
 }
@@ -90,7 +95,8 @@ p {
 
 
 
-input, select {
+input,
+select {
     border: none;
     border-radius: 5px;
     padding: 5px;
@@ -108,4 +114,10 @@ input, select {
 
 table {
     border-collapse: collapse;
+}
+
+.warning {
+    color: #ff4040;
+    font-style: italic;
+    margin-top: 0;
 }

@@ -59,18 +59,17 @@ thead {
 
 label,
 input,
-select {
+select, ng-select, ng-option {
     font-size: larger;
-    width: 256px;
+    width: 375px;
 }
 
-input, select {
+input, select, ng-select {
     border: none;
     border-radius: 5px;
     padding: 5px;
     background-color: #E0F0FF;
 }
-
 
 .modal-content h2,
 .modal-content h1 {
