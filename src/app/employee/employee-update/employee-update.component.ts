@@ -18,6 +18,8 @@ export class EmployeeUpdateComponent {
     new EventEmitter<Employee>();
 
   /** UPDATE. */
+  employeeUpdatedAlert = true;
+  updateEmployeeBegins() { this.employeeUpdatedAlert = false; }
   updateEmployee(employee: Employee | undefined): void {
     if (this.employeeBefore == undefined) this.employeeBefore = employee;
     else {

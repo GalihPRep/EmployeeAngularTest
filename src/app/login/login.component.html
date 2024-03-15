@@ -1,1 +1,19 @@
-<p>login works!</p>
+
+<div class="modal-content">
+    <h1>Log in to this app</h1>
+    <table>
+        <tbody>
+            <tr>
+                <td><label for="login-username">Username</label></td>
+                <td>:</td>
+                <td><input id="login-username" [(ngModel)]="loginBefore.username"></td>
+            </tr>
+            <tr>
+                <td><label for="login-password">Password</label></td>
+                <td>:</td>
+                <td><input id="login-password" [(ngModel)]="loginBefore.password" type="password"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button class="proceed-button" (click)="login(loginBefore)">Submit</button>
+</div>

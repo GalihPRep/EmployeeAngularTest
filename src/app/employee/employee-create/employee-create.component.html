@@ -1,122 +1,105 @@
-<div *ngIf="employeeBefore">
-    <div class="modal">
-        <div class="modal-content">
-            <h2>Create new employee</h2>
+<div class="modal-content">
+    <h1>Create new employee</h1>
 
-            <!-- Input fields. -->
-            <table>
-                <tbody>
-                    <tr>
-                        <td><label for="employee-username">Username</label></td>
-                        <td>:</td>
-                        <td><input id="employee-username" [(ngModel)]="employeeBefore.username"></td>
-                    </tr>
-                    <tr *ngIf="!isNotEmpty(employeeBefore.username)" class="warning">
-                        <td></td>
-                        <td></td>
-                        <td>Username should be filled.</td>
-                    </tr>
+    <!-- Input fields. -->
+    <table>
+        <tbody>
+            <tr>
+                <td><label for="employee-username">Username</label></td>
+                <td>:</td>
+                <td><input id="employee-username" [(ngModel)]="employeeBefore.username"></td>
+                <td *ngIf="!isNotEmpty(employeeBefore.username)" class="warning">
+                    Username should be filled.
+                </td>
+            </tr>
 
-                    <tr>
-                        <td><label for="employee-first-name">First name</label></td>
-                        <td>:</td>
-                        <td><input id="employee-first-name" [(ngModel)]="employeeBefore.firstName"></td>
-                    </tr>
-                    <tr *ngIf="!isNotEmpty(employeeBefore.firstName)" class="warning">
-                        <td></td>
-                        <td></td>
-                        <td>First name should be filled.</td>
-                    </tr>
 
-                    <tr>
-                        <td><label for="employee-last-name">Last name</label>
-                        </td>
-                        <td>:</td>
-                        <td><input id="employee-last-name" [(ngModel)]="employeeBefore.lastName"></td>
-                    </tr>
-                    <tr *ngIf="!isNotEmpty(employeeBefore.lastName)" class="warning">
-                        <td></td>
-                        <td></td>
-                        <td>Last name should be filled.</td>
-                    </tr>
+            <tr>
+                <td><label for="employee-first-name">First name</label></td>
+                <td>:</td>
+                <td><input id="employee-first-name" [(ngModel)]="employeeBefore.firstName"></td>
+                <td *ngIf="!isNotEmpty(employeeBefore.firstName)" class="warning">
+                    First name should be filled.
+                </td>
+            </tr>
 
-                    <tr>
-                        <td><label for="employee-email">Email</label></td>
-                        <td>:</td>
-                        <td><input id="employee-email" [(ngModel)]="employeeBefore.email"></td>
-                    </tr>
-                    <tr *ngIf="!isEmail(employeeBefore.email)" class="warning">
-                        <td></td>
-                        <td></td>
-                        <td>Email format should be valid.</td>
-                    </tr>
+            <tr>
+                <td><label for="employee-last-name">Last name</label>
+                </td>
+                <td>:</td>
+                <td><input id="employee-last-name" [(ngModel)]="employeeBefore.lastName"></td>
+                <td *ngIf="!isNotEmpty(employeeBefore.lastName)" class="warning">
+                    Last name should be filled.
+                </td>
+            </tr>
 
-                    <tr>
-                        <td><label for="employee-birth-date">Birthdate</label></td>
-                        <td>:</td>
-                        <td><input id="employee-birth-date" [(ngModel)]="employeeBefore.birthDate" type="date"></td>
-                    </tr>
-                    <tr *ngIf="!isNotTomorrow(employeeBefore.birthDate)" class="warning">
-                        <td></td>
-                        <td></td>
-                        <td>Birthdate should be no later than today.</td>
-                    </tr>
+            <tr>
+                <td><label for="employee-email">Email</label></td>
+                <td>:</td>
+                <td><input id="employee-email" [(ngModel)]="employeeBefore.email"></td>
+                <td *ngIf="!isEmail(employeeBefore.email)" class="warning">
+                    Email format should be valid.
+                </td>
+            </tr>
 
-                    <tr>
-                        <td><label for="employee-basic-salary">Basic salary</label></td>
-                        <td>:</td>
-                        <td><input id="employee-basic-salary" [(ngModel)]="employeeBefore.basicSalary"></td>
-                    </tr>
-                    <tr *ngIf="!isNumber(employeeBefore.basicSalary)" class="warning">
-                        <td></td>
-                        <td></td>
-                        <td>Basic salary should be numeric.</td>
-                    </tr>
+            <tr>
+                <td><label for="employee-birth-date">Birthdate</label></td>
+                <td>:</td>
+                <td><input id="employee-birth-date" [(ngModel)]="employeeBefore.birthDate" type="date"></td>
+                <td *ngIf="!isNotTomorrow(employeeBefore.birthDate)" class="warning">
+                    Birthdate should be no later than today.
+                </td>
+            </tr>
 
-                    <tr>
-                        <td><label for="employee-status">Status</label>
-                        </td>
-                        <td>:</td>
-                        <td><input id="employee-status" [(ngModel)]="employeeBefore.status"></td>
-                    </tr>
-                    <tr *ngIf="!isNotEmpty(employeeBefore.status)" class="warning">
-                        <td></td>
-                        <td></td>
-                        <td>Status should be filled.</td>
-                    </tr>
+            <tr>
+                <td><label for="employee-basic-salary">Basic salary</label></td>
+                <td>:</td>
+                <td><input id="employee-basic-salary" [(ngModel)]="employeeBefore.basicSalary"></td>
+                <td *ngIf="!isNumber(employeeBefore.basicSalary)" class="warning">
+                    Basic salary should be numeric.
+                </td>
+            </tr>
 
-                    <tr>
-                        <td><label for="employee-group">Group</label></td>
-                        <td>:</td>
-                        <td>
-                            <select id="employee-group" [(ngModel)]="employeeBefore.group">
-                                <option value="">Select the group</option>
-                                <option *ngFor="let n of departmentList" [ngValue]="n">{{n}}</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr *ngIf="!isNotEmpty(employeeBefore.group)" class="warning">
-                        <td></td>
-                        <td></td>
-                        <td>Group should be chosen.</td>
-                    </tr>
 
-                    <tr>
-                        <td><label for="employee-description">Description</label></td>
-                        <td>:</td>
-                        <td><input id="employee-description" [(ngModel)]="employeeBefore.description" type="date"></td>
-                    </tr>
-                    <tr *ngIf="employeeBefore.description == null" class="warning">
-                        <td></td>
-                        <td></td>
-                        <td>Description date should be filled.</td>
-                    </tr>
-                </tbody>
-            </table>
+            <tr>
+                <td><label for="employee-status">Status</label>
+                </td>
+                <td>:</td>
+                <td><input id="employee-status" [(ngModel)]="employeeBefore.status"></td>
+                <td *ngIf="!isNotEmpty(employeeBefore.status)" class="warning">
+                    Status should be filled.
+                </td>
+            </tr>
 
-            <!-- Button. -->
-            <div>
-                <button *ngIf="
+            <tr>
+                <td><label for="employee-group">Group</label></td>
+                <td>:</td>
+                <td>
+                    <select id="employee-group" [(ngModel)]="employeeBefore.group">
+                        <option value="">Select the group</option>
+                        <option *ngFor="let n of departmentList" [ngValue]="n">{{n}}</option>
+                    </select>
+                </td>
+                <td *ngIf="!isNotEmpty(employeeBefore.group)" class="warning">
+                    Group should be chosen.
+                </td>
+            </tr>
+
+
+            <tr>
+                <td><label for="employee-description">Description</label></td>
+                <td>:</td>
+                <td><input id="employee-description" [(ngModel)]="employeeBefore.description" type="date"></td>
+                <td *ngIf="employeeBefore.description == null" class="warning">
+                    Description date should be filled.</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <!-- Button. -->
+    <div>
+        <button *ngIf="
                     employeeBefore.username.length >= 1
                     && employeeBefore.firstName.length >= 1
                     && employeeBefore.lastName.length >= 1
@@ -127,8 +110,6 @@
                     && employeeBefore.group.length >= 1
                     && employeeBefore.description != null
                 " class="done-button" (click)="createEmployee(employeeBefore)">Save</button>
-                <button class="done-button" (click)="createEmployee(null)">Cancel</button>
-            </div>
-        </div>
+        <button class="done-button" (click)="createEmployee(null)">Cancel</button>
     </div>
 </div>

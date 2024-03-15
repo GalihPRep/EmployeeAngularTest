@@ -4,21 +4,37 @@
         (employeeAfter)="createEmployee($event)"></app-employee-create>
 </div>
 
-
-
 <!-- UPDATE the employee. -->
 <div *ngIf="employeeUpdated">
     <app-employee-update [employeeBefore]="employeeUpdated"
         (employeeAfter)="updateEmployee($event)"></app-employee-update>
 </div>
 
+<div *ngIf="employeeRead">
+    <app-employee-read [employeeRead]="employeeRead" (employeeUnread)="readEmployee($event)"></app-employee-read>
+</div>
 
+<!-- DELETE the employee. -->
+<div *ngIf="employeeDeletedAlert" class="modal">
+    <div class="modal-alert">
+        <p>You are about to delete this employee. Proceed?</p>
+        <div>
+            <button class="proceed-button" (click)="deleteEmployee(employeeDeleted)">Yes</button>
+            <button class="proceed-button" (click)="deleteEmployee(null)">No</button>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Paging and add buttons. -->
 <button class="add-button" type="button" (click)="createEmployeeBegins()">Add new employee</button>
 <!-- Count. -->
 <div class="count">
     <div class="paging">
         Showing {{filterEmployeeList(employeeFiltered).length}}
         of {{employeeList.length}} data. Page {{currentPage}} of {{lastPage}}.
+        Click the row to see its details.
     </div>
     <div class="paging">
         Show
@@ -117,79 +133,9 @@
                 <button class="edit-button" [class.selected]="n === employeeUpdated" type="button"
                     (click)="updateEmployee(n)">Edit</button>
                 <button class="delete-button" [class.selected]="n === employeeUpdated" type="button"
-                    (click)="updateEmployee(n)">Delete</button>
+                    (click)="deleteEmployeeBegins(n)">Delete</button>
             </td>
         </tr>
     </tbody>
 </table>
 
-
-
-<!-- READ employee. -->
-<div *ngIf="employeeRead">
-    <div class="edit-modal" (keypress)="readEmployee(employeeRead)">
-        <div class="edit-modal-content">
-            <!-- Title. -->
-            <div class="edit-modal-content-title">
-                <h2>
-                    Details of
-                    {{employeeRead.firstName}}
-                    {{employeeRead.lastName}}
-                </h2>
-                <span class="close-button" type="button" (click)="readEmployee(employeeRead)">&times;</span>
-            </div>
-            <!-- Input fields. -->
-            <table>
-                <tbody>
-                    <tr>
-                        <td><label for="employee-username">Username</label></td>
-                        <td>:</td>
-                        <td><input id="employee-username" [(ngModel)]="employeeRead.username" readonly></td>
-                    </tr>
-                    <tr>
-                        <td><label for="employee-first-name">First name</label></td>
-                        <td>:</td>
-                        <td><input id="employee-first-name" [(ngModel)]="employeeRead.firstName" readonly></td>
-                    </tr>
-                    <tr>
-                        <td><label for="employee-last-name">Last name</label>
-                        </td>
-                        <td>:</td>
-                        <td><input id="employee-last-name" [(ngModel)]="employeeRead.lastName" readonly></td>
-                    </tr>
-                    <tr>
-                        <td><label for="employee-email">Email</label></td>
-                        <td>:</td>
-                        <td><input id="employee-email" [(ngModel)]="employeeRead.email" readonly></td>
-                    </tr>
-                    <tr>
-                        <td><label for="employee-birth-date">Birthdate</label></td>
-                        <td>:</td>
-                        <td><input id="employee-birth-date" [(ngModel)]="employeeRead.birthDate" readonly></td>
-                    </tr>
-                    <tr>
-                        <td><label for="employee-basic-salary">Basic salary</label></td>
-                        <td>:</td>
-                        <td><input id="employee-basic-salary" [(ngModel)]="employeeRead.basicSalary" readonly></td>
-                    </tr>
-                    <tr>
-                        <td><label for="employee-status">Status</label>
-                        </td>
-                        <td>:</td>
-                        <td><input id="employee-status" [(ngModel)]="employeeRead.status" readonly></td>
-                    </tr>
-                    <tr>
-                        <td><label for="employee-group">Group</label></td>
-                        <td>:</td>
-                        <td><input id="employee-group" [(ngModel)]="employeeRead.group" readonly></td>
-                    </tr>
-                    <tr>
-                        <td><label for="employee-description">Description</label></td>
-                        <td>:</td>
-                        <td><input id="employee-description" [(ngModel)]="employeeRead.description" readonly></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>

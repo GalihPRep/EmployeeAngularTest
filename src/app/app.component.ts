@@ -7,6 +7,8 @@ import { RouterOutlet } from '@angular/router';
  * `app.component.html`.
  */
 import { EmployeeComponent } from "./employee/employee.component";
+import { LoginComponent } from './login/login.component';
+import { NgIf } from '@angular/common';
 
 /**
  * Put `EmployeeComponent` here.
@@ -16,11 +18,12 @@ import { EmployeeComponent } from "./employee/employee.component";
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, EmployeeComponent]
+    imports: [RouterOutlet, EmployeeComponent, LoginComponent, NgIf]
 })
 
-/** This class will be imported into `src/main.ts`. */
 export class AppComponent {
-  /** This will appears in the main page. */
   title = 'Employee list';
+  isLoggedIn = true;
+  login(): void { this.isLoggedIn = true; }
+  logout(): void { this.isLoggedIn = false; }
 }

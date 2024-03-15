@@ -23,8 +23,7 @@ p {
     font-style: italic;
 }
 
-.done-button,
-.proceed-button {
+.done-button, .proceed-button {
     border: none;
     border-radius: 8px;
     font-size: 18pt;
@@ -41,20 +40,17 @@ p {
     margin-left: 4px;
     margin-right: 4px;
 }
-
 .done-button:hover,
 .done-button:focus {
     background-color: #ffff20;
     cursor: pointer;
 }
-
 .proceed-button {
     margin-left: 8px;
     margin-right: 8px;
     background-color: #FF2000;
     color: white;
 }
-
 .proceed-button:hover,
 .proceed-button:focus {
     background-color: #ff5820;
@@ -62,39 +58,21 @@ p {
 }
 
 
-.modal {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0, 0.25);
-}
-
-/* Modal Content/Box */
-.modal-content,
-.modal-alert {
-    margin: 6.25% auto;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    padding-left: 32px;
-    padding-right: 32px;
-    border: none;
-    border-radius: 16px;
-    height: fit-content;
-    width: fit-content;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-}
 
 .modal-content {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    overflow: auto;
     background-color: #ffffff;
-}
-
-.modal-alert {
-    background-color: #FFE000;
+    padding: 16px;
+    border: none;
+    height: 100%;
+    width: 100%;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
 }
 
 .modal-content td {
@@ -107,19 +85,19 @@ p {
 
 
 
-input,
-select {
+input, select {
     border: none;
     border-radius: 5px;
     padding: 5px;
     background-color: #E0F0FF;
 }
 
-.modal-content h2 {
+.modal-content h2,
+.modal-content h1 {
     margin-top: 6px;
     margin-bottom: 16px;
     width: 100%;
-    text-align: center;
+    text-align: left;
 }
 
 

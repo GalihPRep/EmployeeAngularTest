@@ -1,0 +1,69 @@
+<div *ngIf="employeeRead">
+        <div class="modal-content">
+            <h1>Details of {{employeeRead.firstName}} {{employeeRead.lastName}}</h1>
+
+            <!-- Input fields. -->
+            <table>
+                <tbody>
+                    <tr>
+                        <td><label for="employee-username">Username</label></td>
+                        <td>:</td>
+                        <td><input id="employee-username" [(ngModel)]="employeeRead.username" readonly></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="employee-first-name">First name</label></td>
+                        <td>:</td>
+                        <td><input id="employee-first-name" [(ngModel)]="employeeRead.firstName" readonly></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="employee-last-name">Last name</label>
+                        </td>
+                        <td>:</td>
+                        <td><input id="employee-last-name" [(ngModel)]="employeeRead.lastName" readonly></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="employee-email">Email</label></td>
+                        <td>:</td>
+                        <td><input id="employee-email" [(ngModel)]="employeeRead.email" readonly></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="employee-birth-date">Birthdate</label></td>
+                        <td>:</td>
+                        <td><input id="employee-birth-date" [ngModel]="toDate(employeeRead.birthDate)" readonly></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="employee-basic-salary">Basic salary</label></td>
+                        <td>:</td>
+                        <td><input id="employee-basic-salary" [ngModel]="toCurrency(employeeRead.basicSalary)" readonly></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="employee-status">Status</label>
+                        </td>
+                        <td>:</td>
+                        <td><input id="employee-status" [(ngModel)]="employeeRead.status" readonly></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="employee-group">Group</label></td>
+                        <td>:</td>
+                        <td>
+                            <input id="employee-group" [(ngModel)]="employeeRead.group" readonly>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="employee-description">Description</label></td>
+                        <td>:</td>
+                        <td><input id="employee-description" [ngModel]="toDate(employeeRead.description)" readonly></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="done-button" (click)="unreadEmployee()">Return</button>
+        </div>
+</div>

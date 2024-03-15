@@ -33,27 +33,18 @@ thead {
 
 
 
-.modal {
+.modal-content {
     position: fixed;
     z-index: 1;
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
     overflow: auto;
-    background-color: rgb(0, 0, 0, 0.25);
-}
-
-/* Modal Content/Box */
-.modal-content {
-    background-color: #fefefe;
-    margin: 6.25% auto;
+    background-color: #ffffff;
     padding: 16px;
     border: none;
-    border-radius: 16px;
-    height: fit-content;
-    width: fit-content;
-    align-items: center;
+    height: 100%;
+    width: 100%;
+    align-items: flex-start;
     display: flex;
     flex-direction: column;
 }
@@ -70,6 +61,7 @@ label,
 input,
 select {
     font-size: larger;
+    width: 256px;
 }
 
 input, select {
@@ -80,11 +72,12 @@ input, select {
 }
 
 
-.modal-content h2 {
+.modal-content h2,
+.modal-content h1 {
     margin-top: 6px;
     margin-bottom: 16px;
     width: 100%;
-    text-align: center;
+    text-align: left;
 }
 
 

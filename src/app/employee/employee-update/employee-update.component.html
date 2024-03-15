@@ -1,6 +1,14 @@
 <div *ngIf="employeeBefore">
     <div class="modal">
-        <div class="modal-content">
+        <div *ngIf="employeeUpdatedAlert" class="modal-alert">
+            <p>You are about to edit this employee. Proceed?</p>
+            <div>
+                <button class="proceed-button" (click)="updateEmployeeBegins()">Yes</button>
+                <button class="proceed-button" (click)="updateEmployee(employeeBefore)">No</button>
+            </div>
+        </div>
+
+        <div *ngIf="!employeeUpdatedAlert" class="modal-content">
             <h2>Edit this employee</h2>
 
             <!-- Input fields. -->

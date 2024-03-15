@@ -5,6 +5,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { EMPLOYEES } from '../../constants/Employees';
 import { EmployeeUpdateComponent } from './employee-update/employee-update.component';
 import { EmployeeCreateComponent } from './employee-create/employee-create.component';
+import { EmployeeReadComponent } from './employee-read/employee-read.component';
 
 
 
@@ -16,6 +17,7 @@ import { EmployeeCreateComponent } from './employee-create/employee-create.compo
     NgFor,    // To use `*ngFor`.
     NgIf,    // To use `*ngIf`.
     EmployeeUpdateComponent,    // Child component.
+    EmployeeReadComponent,    // Child component.
     EmployeeCreateComponent    // Child component.
   ],
   templateUrl: './employee.component.html',
@@ -27,13 +29,7 @@ export class EmployeeComponent {
 
   /** CREATE. */
   employeeCreated: boolean = false;
-
-  /** CREATE. */
-  createEmployeeBegins() {
-    this.employeeCreated = true;
-  }
-
-  /** CREATE. */
+  createEmployeeBegins() { this.employeeCreated = true; }
   createEmployee(employee: Employee | null): void {
     if (employee != null) {
       employee.id = this.employeeList.length + 1;
@@ -44,8 +40,6 @@ export class EmployeeComponent {
 
   /** READ. */
   employeeRead?: Employee;
-
-  /** READ. */
   readEmployee(employee: Employee): void {
     if (this.employeeRead == undefined) this.employeeRead = employee;
     else this.employeeRead = undefined;
@@ -53,15 +47,25 @@ export class EmployeeComponent {
 
   /** UPDATE. */
   employeeUpdated?: Employee;
-
-  /** UPDATE. */
   updateEmployee(employee: Employee): void {
-    if (this.employeeUpdated == undefined) this.employeeUpdated = employee;
-    else this.employeeUpdated = undefined;
+    if (this.employeeUpdated == undefined) {
+      this.employeeUpdated = employee;
+    } else this.employeeUpdated = undefined;
   }
 
   /** DELETE. */
   employeeDeleted?: Employee;
+  employeeDeletedAlert = false;
+  deleteEmployeeBegins(employee: Employee) { 
+    this.employeeDeletedAlert = true; 
+    this.employeeDeleted = employee;
+  }
+  deleteEmployee(employee?: Employee | null): void {
+    this.employeeDeletedAlert = false;
+    if (employee != null) this
+      .employeeList
+      .splice(this.employeeList.findIndex(n => n == employee), 1);
+  }
 
   /** Is `employeeList` sorted descending? */
   employeeListSorting: boolean | null = null;
@@ -120,6 +124,9 @@ export class EmployeeComponent {
       && (
         n.firstName.toLowerCase().includes(query.firstName.toLowerCase())
         || n.lastName.toLowerCase().includes(query.firstName.toLowerCase())
+        || (
+          n.firstName + " " + n.lastName
+        ).toLowerCase().includes(query.firstName.toLowerCase())
       )
       && n.email.toLowerCase().includes(query.email.toLowerCase())
       && n.status.toLowerCase().includes(query.status.toLowerCase())
@@ -174,13 +181,13 @@ export class EmployeeComponent {
     }
   }
 
-  
+
 
   setPageSize(size: number): void {
     this.expectedPageSize = size;
   }
 
-  
+
 }
 
 
